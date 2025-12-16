@@ -19,6 +19,15 @@ export default function TabsLayout() {
                     ),
                 }} 
             />
+            <Tabs.Screen
+                name="week"
+                options={{
+                    title: "Week",
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialIcons name="date-range" color={color} size={size} />
+                    ),
+                }}
+            />
             <Tabs.Screen 
                 name="rules" 
                 options={{ 
