@@ -1,3 +1,4 @@
+import { LinearGradient } from "expo-linear-gradient";
 import React, { useEffect, useMemo, useState } from "react";
 import {
     AppState,
@@ -8,7 +9,6 @@ import {
     Text,
     View,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import {
     getTodayUsage,
     hasUsageAccess,
