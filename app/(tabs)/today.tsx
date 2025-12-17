@@ -13,7 +13,7 @@ import {
     getTodayUsage,
     hasUsageAccess,
     openUsageAccessSettings,
-    type UsageRow,
+    type UsageRow
 } from "../../modules/screentime";
 
 const BAR_MAX_HEIGHT = 140;
@@ -57,13 +57,16 @@ export default function Today() {
     );
 
     async function refresh() {
+        // console.log("REFRESHING PANCHOOO");
         const ok = await hasUsageAccess();
         setAllowed(ok);
         if (!ok) return;
 
         setLoading(true);
         try {
+            // console.log("pohonch gaye yahan");
             const data = await getTodayUsage();
+            console.log(data.slice(0, 5));
             setRows(data);
         } finally {
             setLoading(false);
@@ -123,7 +126,7 @@ export default function Today() {
                         const barHeight = Math.max(ratio * BAR_MAX_HEIGHT, 8);
                         const color = COLORS[idx % COLORS.length];
                         return (
-                            <View key={item.packageName} style={styles.barWrapper}>
+                            <View key={item.appName} style={styles.barWrapper}>
                                 <Text style={styles.barTime}>{msToHuman(item.totalTimeInForeground)}</Text>
                                 <View style={[styles.barOuter, { height: BAR_MAX_HEIGHT }]}>
                                     <LinearGradient
@@ -134,7 +137,7 @@ export default function Today() {
                                     />
                                 </View>
                                 <Text style={styles.barLabel} numberOfLines={1}>
-                                    {item.label?.split(" ")[0] ?? "App"}
+                                    {item.appName?.split(".").slice(-1)[0] ?? "lol"}
                                 </Text>
                             </View>
                         );
@@ -149,10 +152,10 @@ export default function Today() {
                     const ratio = (item.totalTimeInForeground ?? 0) / maxMs;
                     const color = COLORS[idx % COLORS.length];
                     return (
-                        <View key={item.packageName} style={styles.listItem}>
+                        <View key={item.appName} style={styles.listItem}>
                             <View style={[styles.listDot, { backgroundColor: color }]} />
                             <View style={styles.listInfo}>
-                                <Text style={styles.listLabel}>{item.label}</Text>
+                                <Text style={styles.listLabel}>{item.appName.split(".").slice(-1)[0]}</Text>
                                 <View style={styles.progressBg}>
                                     <View style={[styles.progressFill, { width: `${ratio * 100}%`, backgroundColor: color }]} />
                                 </View>

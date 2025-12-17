@@ -5,7 +5,7 @@ export { default as ScreentimeView } from './src/ScreentimeView';
 import ScreenTimeModule from './src/ScreentimeModule';
 
 export type UsageRow = {
-    packageName: string;
+    appName: string;
     label: string;
     totalTimeInForeground: number;
 }
@@ -20,4 +20,8 @@ export const openUsageAccessSettings = async (): Promise<boolean> => {
 
 export const getTodayUsage = async (): Promise<UsageRow[]> => {
     return await ScreenTimeModule.getTodayUsage();
+}
+
+export const getTodayUsageExact = async (): Promise<UsageRow[]> => {
+  return await ScreenTimeModule.getTodayUsageExact();
 }
